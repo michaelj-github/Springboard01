@@ -1,0 +1,66 @@
+
+countdown
+
+Write a function called countdown that accepts a number as a parameter and every 1000 milliseconds decrements the value and console.logs it. Once the value is 0 it should log “DONE!” and stop.
+
+countDown(4);
+// 3
+// 2
+// 1
+// "DONE!"
+
+randomGame
+
+Write a function called randomGame that selects a random number between 0 and 1 every 1000 milliseconds and each time that a random number is picked, add 1 to a counter. If the number is greater than .75, stop the timer and console.log the number of tries it took before we found a number greater than .75.
+
+
+
+
+#1
+function countDown (num) {
+  for ( let i = num - 1; i >=0; i--) {
+    if (i === 0) {
+      setTimeout(conLog, num * 1000, i)
+    }
+    else {
+      setTimeout(conLog, (num - i) * 1000, i)
+    }
+
+  }
+}
+
+function conLog(arg) {
+    if (arg === 0) {
+      console.log("DONE!")
+    }
+    else {
+      console.log(arg)
+    }
+}
+
+
+
+
+
+#2
+function randomGame () {
+let tries = 1;
+  let  myInterval = setInterval(conLog, 1000);
+setInterval (conLog, 1000, myInterval, tries)
+}
+
+
+function conLog(arg, tries) {
+ 
+  rndNum = Math.random();
+  if (rndNum >.75) {
+    clearInterval(arg); 
+    console.log(tries);
+  }
+  else {
+    tries++;
+    return tries;
+  }
+}
+
+
