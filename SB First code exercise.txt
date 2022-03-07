@@ -39,7 +39,18 @@ function conLog(arg) {
 }
 
 
-
+#1 second try
+function countDown(num) {
+  let mjCounter = setInterval(function() {
+    num--;
+    if (num <= 0) {
+      clearInterval(mjCounter);
+      console.log("DONE!");
+    } else {
+      console.log(num)
+    }
+  }, 1000)
+}
 
 
 #2
@@ -62,5 +73,26 @@ function conLog(arg, tries) {
     return tries;
   }
 }
+
+
+#2 second try
+function randomGame() {
+let mjTries = 0;
+let mjRndNum = 0;
+let tryTries = "try!";
+let mjInterval = setInterval(function() {
+mjTries++;
+// console.log(mjTries);
+mjRndNum = Math.random();
+if (mjRndNum >.75) {
+clearInterval(mjInterval);
+console.log(`It took ${mjTries} ${tryTries}`);
+}
+else {
+  tryTries = "tries!";
+}
+}, 1000)
+}
+
 
 
