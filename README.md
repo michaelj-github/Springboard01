@@ -1,2 +1,2 @@
-# Springboard01
-First Springboard exercise
+# Springboard
+Springboard exercises
