@@ -1,0 +1,140 @@
+JS Todos Exercise
+Part 1
+
+For this assignment you will be combining your knowledge of DOM access and events to build a todo app!
+
+As a user, you should be able to:
+
+    Add a new todo (by submitting a form)
+    Mark a todo as completed (cross out the text of the todo)
+    Remove a todo
+
+Part 2
+
+Now that you have a functioning todo app, save your todos in localStorage! Make sure that when the page refreshes, the todos on the page remain there.
+
+
+
+
+Part 1
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>ToDo</title>
+</head>
+
+<body>
+  <h1>ToDo List</h1>
+  <p>A great way to maintain your to do list!</p>
+
+  <form id="todoform">
+    <label for="newtodo"></label>
+    <input type="text" placeholder="Enter a new to do item" name="newtodo" value="" id="toDoName">
+    <button>Add ToDo</button>
+
+  </form>
+
+  <section id="theList">
+
+  </section>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
+
+CSS
+.strike {
+    text-decoration: line-through;
+}
+
+
+JS
+// const cButtons = document.querySelectorAll('p');
+// const rButtons = document.querySelectorAll('p');
+const form = document.querySelector('#todoform');
+const todoInput = document.querySelector('input[name="newtodo"]');
+const newToDos = document.querySelector('#theList');
+
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+const newToDo = document.createElement('p');
+const removeButton = document.createElement('button');
+const strikeButton = document.createElement('button');
+newToDo.innerText = todoInput.value;
+removeButton.innerText = 'Remove';
+removeButton.addEventListener('click', function(e) {
+  e.target.parentElement.remove();
+})
+strikeButton.innerText = 'Completed';
+strikeButton.addEventListener('click', function(e) {
+  e.target.parentElement.classList.add("strike");
+})
+newToDo.prepend(removeButton);
+newToDo.prepend(strikeButton);
+theList.appendChild(newToDo);
+todoInput.value = '';
+})
+
+
+
+
+
+
+Part 2
+
+const toDoArray = []; // create the todo array
+const newToDos = document.querySelector('#theList'); // the section where the list of todos will be displayed
+let gotArray = JSON.parse(localStorage.getItem('toDoArray')); // retrieve the array
+if (gotArray == null) {
+  gotArray = []; // if no todo list is stored then set to an empty array
+} else {
+  // load the on-screen todo list from the stored gotArray
+  for (let aTodo in gotArray) {
+    const newToDo = document.createElement('p');
+    const removeButton = document.createElement('button');
+    const strikeButton = document.createElement('button');
+    newToDo.innerText = gotArray[aTodo][0];
+    removeButton.innerText = 'Remove';
+    removeButton.addEventListener('click', function(e) {
+      e.target.parentElement.remove();
+    })
+    strikeButton.innerText = 'Completed';
+    strikeButton.addEventListener('click', function(e) {
+      e.target.parentElement.classList.add("strike");
+    })
+    newToDo.prepend(removeButton);
+    newToDo.prepend(strikeButton);
+    theList.appendChild(newToDo);
+    toDoArray.push([gotArray[aTodo][0], gotArray[aTodo][1]]);
+  }
+}
+const form = document.querySelector('#todoform'); // create the input form
+const todoInput = document.querySelector('input[name="newtodo"]');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const newToDo = document.createElement('p');
+  const removeButton = document.createElement('button');
+  const strikeButton = document.createElement('button');
+  newToDo.innerText = todoInput.value;
+  toDoArray.push([todoInput.value, false]);
+  removeButton.innerText = 'Remove';
+  removeButton.addEventListener('click', function(e) {
+    e.target.parentElement.remove();
+  })
+  strikeButton.innerText = 'Completed';
+  strikeButton.addEventListener('click', function(e) {
+    e.target.parentElement.classList.add("strike");
+  })
+  newToDo.prepend(removeButton); // add the buttons
+  newToDo.prepend(strikeButton);
+  theList.appendChild(newToDo); // add this todo to the list
+  todoInput.value = ''; // clear the input form
+  localStorage.setItem('toDoArray', JSON.stringify(toDoArray)); // store the array
+})
