@@ -87,7 +87,41 @@ todoInput.value = '';
 
 
 
-Part 2
+Part 2 (this is the second attempt after reviewing the solution. It is the same as the first attempt except that the "Completed" and "Remove" buttons have been removed, see below for the first attempt.)
+
+Second attempt at part 2:
+
+const toDoArray = []; // create the todo array
+const newToDos = document.querySelector('#theList'); // the section where the list of todos will be displayed
+
+let gotArray = JSON.parse(localStorage.getItem('toDoArray')); // retrieve the array
+if (gotArray == null) {
+  gotArray = []; // if no todo list is stored then set to an empty array
+} else {
+  for (let aTodo in gotArray) {
+    const newToDo = document.createElement('p');
+    newToDo.innerText = gotArray[aTodo][0];
+    theList.appendChild(newToDo);
+    toDoArray.push([gotArray[aTodo][0]]);
+  }
+}
+const form = document.querySelector('#todoform'); // create the input form
+const todoInput = document.querySelector('input[name="newtodo"]');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const newToDo = document.createElement('p');
+  newToDo.innerText = todoInput.value;
+  toDoArray.push([todoInput.value, false]);
+  theList.appendChild(newToDo); // add this todo to the list
+  todoInput.value = ''; // clear the input form
+  localStorage.setItem('toDoArray', JSON.stringify(toDoArray)); // store the array
+})
+
+
+
+********************************************
+
+First attempt at part 2:
 
 const toDoArray = []; // create the todo array
 const newToDos = document.querySelector('#theList'); // the section where the list of todos will be displayed
