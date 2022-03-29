@@ -1,0 +1,22 @@
+
+  // var PI = 3.14;
+  // PI = 42; // stop me from doing this!
+
+  const PI = 3.14;
+  PI = 42; // Uncaught TypeError: Assignment to constant variable.
+
+
+Quiz
+
+    What is the difference between var and let?
+var is function scoped and allows redeclaration as well as reassignment. let is block scoped and allows reassignment but not redeclaration.
+
+    What is the difference between var and const?
+var is function scoped and allows redeclaration as well as reassignment. const is block scoped and does not allow reassignment or redeclaration.
+
+    What is the difference between let and const?
+let is block scoped and allows reassignment but not redeclaration. const is block scoped and does not allow reassignment or redeclaration.
+
+    What is hoisting?
+the compiler processes a declaration for variables created with var prior to the code running.
+
